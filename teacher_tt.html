@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Portal</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f2f2f2; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 90%; margin: 20px 0; }
+        th, td { border: 1px solid #555; padding: 10px; text-align: center; }
+        th { background-color: #ddd; }
+    </style>
+</head>
+<body>
+    <h1>All Student Schedules</h1>
+    <table>
+        <tr>
+            <th>Student Name</th>
+            <th>Subject</th>
+            <th>Time Block</th>
+            <th>Scheduled Time</th>
+        </tr>
+        {% for s in schedules %}
+        <tr>
+            <td>{{ s.student_name }}</td>
+            <td>{{ s.subject }}</td>
+            <td>{{ s.time_block }}</td>
+            <td>{{ s.scheduled_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

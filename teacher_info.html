@@ -1,0 +1,9 @@
+<div class="main">
+    <h1>Teacher Info</h1>
+    <p>Here you can view your personal information from the database:</p>
+    <table style="color:white; margin:auto; border-collapse:collapse;">
+        {% for key, value in info.items() %}
+        <tr><th>{{ key }}</th><td>{{ value }}</td></tr>
+        {% endfor %}
+    </table>
+</div>

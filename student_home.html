@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {
+  display:flex;
+  height:100vh;
+  font-family:'Poppins',sans-serif;
+  color:white;
+  background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&q=80')
+            no-repeat center center/cover;
+}
+/* Sidebar */
+.sidebar {
+  width:280px;
+  background:rgba(10,10,25,0.95);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:30px 20px;
+  border-right:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(8px);
+}
+.sidebar img {
+  width:110px;height:110px;border-radius:50%;border:3px solid #00bfff;margin-bottom:20px;
+}
+.sidebar h2 {margin-bottom:10px;font-size:20px;font-weight:600;}
+.social-icons {display:flex;gap:15px;margin-bottom:30px;}
+.social-icons a {color:#00bfff;font-size:18px;transition:0.3s;}
+.social-icons a:hover {color:#fff;}
+.nav-links {display:flex;flex-direction:column;width:100%;}
+.nav-links a {
+  text-decoration:none;color:#bbb;font-size:16px;padding:12px 20px;border-radius:8px;
+  margin:5px 0;transition:0.3s;display:flex;align-items:center;gap:10px;
+}
+.nav-links a:hover,.nav-links a.active {
+  background-color:rgba(0,191,255,0.2);color:#fff;
+}
+/* Main */
+.main {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  backdrop-filter:blur(5px);
+}
+.slideshow {
+  max-width:700px;
+  margin-bottom:40px;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+.slideshow img {
+  width:100%;
+  height:400px;
+  object-fit:cover;
+  display:none;
+}
+.slideshow img.active {display:block;}
+.clock {
+  font-size:2.5em;
+  margin-top:10px;
+  color:#00bfff;
+  animation:blink 1s infinite;
+}
+@keyframes blink {
+  50% {opacity:0.4;}
+}
+</style>
+<script>
+let index = 0;
+function showSlides() {
+  const slides = document.querySelectorAll('.slideshow img');
+  slides.forEach((s,i)=> s.classList.toggle('active', i===index));
+  index = (index + 1) % slides.length;
+  setTimeout(showSlides, 3000);
+}
+function updateTime() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString();
+  setTimeout(updateTime,1000);
+}
+window.onload = ()=>{ showSlides(); updateTime(); };
+</script>
+</head>
+<body>
+  <div class="sidebar">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Profile">
+    <h2>{{ student_name if student_name else 'Student' }}</h2>
+    <div class="social-icons">
+      <a href="https://github.com"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com"><i class="fab fa-linkedin"></i></a>
+      <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="nav-links">
+      <a href="{{ url_for('student_home') }}" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="{{ url_for('student_schedule') }}"><i class="fas fa-cogs"></i> Generate Schedule</a>
+      <a href="{{ url_for('view_schedules') }}"><i class="fas fa-calendar"></i> View Schedules</a>
+    </div>
+  </div>
+  <div class="main">
+    <div class="slideshow">
+    <img src="{{ url_for('static', filename='download.jpg') }}" class="active">
+    <img src="{{ url_for('static', filename='download1.png') }}">
+    <img src="{{ url_for('static', filename='download2.png') }}">
+</div>
+
+    <h1>Welcome to the Smart Schedule Portal</h1>
+    <p>Empower your learning with AI-driven scheduling</p>
+    <div id="clock" class="clock"></div>
+  </div>
+</body>
+</html>

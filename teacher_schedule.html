@@ -1,0 +1,30 @@
+<div class="main">
+    <h1>Generate Schedule</h1>
+    <form method="POST" action="{{ url_for('teacher_schedule') }}">
+        <label>Class/Student:</label>
+        <input type="text" name="class_or_student" required><br><br>
+
+        <label>Subjects (comma-separated):</label>
+        <input type="text" name="subjects" required><br><br>
+
+        <button type="submit">Generate</button>
+    </form>
+
+    {% if schedule %}
+        <h2>Generated Schedule</h2>
+        <table border="1" style="color:white; margin:auto; border-collapse:collapse;">
+            <tr>
+                <th>Subject</th>
+                <th>Time Block</th>
+                <th>Scheduled Time</th>
+            </tr>
+            {% for row in schedule %}
+            <tr>
+                <td>{{ row.subject }}</td>
+                <td>{{ row.time_block }}</td>
+                <td>{{ row.scheduled_time }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</div>

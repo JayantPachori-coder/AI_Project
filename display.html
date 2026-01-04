@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Schedule</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #6f42c1, #007bff);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container {
+            margin-top: 60px;
+            background: #ffffff10;
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+        }
+        h2 { text-align: center; margin-bottom: 20px; }
+        table {
+            color: #fff;
+            text-align: center;
+        }
+        th, td {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .btn-download {
+            background: #00c3ff;
+            color: white;
+            border: none;
+        }
+        .btn-download:hover {
+            background: #0097d1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📅 Your Smart Schedule</h2>
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Difficulty</th>
+                    <th>Performance</th>
+                    <th>Hours</th>
+                    <th>Time Block</th>
+                    <th>Scheduled Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in schedule_data %}
+                <tr>
+                    <td>{{ row.subject }}</td>
+                    <td>{{ row.difficulty }}</td>
+                    <td>{{ row.performance }}</td>
+                    <td>{{ row.hours }}</td>
+                    <td>{{ row.time_block }}</td>
+                    <td>{{ row.scheduled_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('download_schedule', student_id=student_id) }}" class="btn btn-download">⬇ Download Schedule as PDF</a>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="{{ url_for('student_home') }}" class="btn btn-light">🏠 Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

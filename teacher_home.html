@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Teacher Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body {
+    display:flex;
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+    color:white;
+    background: url('{{ url_for("static", filename="bgm.png") }}') no-repeat center center/cover;
+}
+/* Sidebar */
+.sidebar {
+    width:280px;
+    background:rgba(10,10,25,0.95);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:30px 20px;
+    border-right:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(8px);
+}
+.sidebar img { width:110px; height:110px; border-radius:50%; border:3px solid #00bfff; margin-bottom:20px; }
+.sidebar h2 {margin-bottom:10px;font-size:20px;font-weight:600;}
+.nav-links {display:flex;flex-direction:column;width:100%;}
+.nav-links a {
+    text-decoration:none; color:#bbb; font-size:16px;
+    padding:12px 20px; border-radius:8px; margin:5px 0;
+    transition:0.3s; display:flex; align-items:center; gap:10px;
+}
+.nav-links a:hover,.nav-links a.active {background-color:rgba(0,191,255,0.2); color:#fff;}
+/* Main */
+.main {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    backdrop-filter:blur(5px);
+    padding:20px;
+}
+</style>
+</head>
+<body>
+<div class="sidebar">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Profile">
+    <h2>{{ teacher_name if teacher_name else 'Teacher' }}</h2>
+    <div class="nav-links">
+        <a href="{{ url_for('teacher_home') }}" class="active"><i class="fas fa-home"></i> Home</a>
+        <a href="{{ url_for('teacher_profile') }}"><i class="fas fa-user"></i> My Profile</a>
+        <a href="{{ url_for('teacher_schedule') }}"><i class="fas fa-calendar-alt"></i> Generate Schedule</a>
+        <a href="{{ url_for('teacher_info') }}"><i class="fas fa-info-circle"></i> Info</a>
+    </div>
+</div>
+<div class="main">
+    <h1>Welcome, {{ teacher_name }}</h1>
+    <p>Manage your schedules and profile efficiently</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ student_name }}'s Schedule</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 80%; margin: 20px 0; }
+        th, td { border: 1px solid #555; padding: 10px; text-align: center; }
+        th { background-color: #eee; }
+    </style>
+</head>
+<body>
+    <h1>Schedule for {{ student_name }}</h1>
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Predicted Slot</th>
+            <th>Time Block</th>
+            <th>Scheduled Time</th>
+        </tr>
+        {% for s in schedule %}
+        <tr>
+            <td>{{ s.subject }}</td>
+            <td>{{ s.predicted_slot }}</td>
+            <td>{{ s.time_block }}</td>
+            <td>{{ s.scheduled_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
